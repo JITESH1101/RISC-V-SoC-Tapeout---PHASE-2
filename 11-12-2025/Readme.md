@@ -189,6 +189,9 @@ First clone the caravel github repo using the following command
 git clone https://github.com/efabless/caravel/tree/main/verilog/dv
 ```
 
+<img width="2453" height="655" alt="rename_github_repo" src="https://github.com/user-attachments/assets/e2898f45-5b3c-4b45-bb6b-834ae3be379d" />
+
+
 Now to install the Sky130 pdk, enter the following commands
 
 ```
@@ -231,6 +234,14 @@ volare ls-remote --pdk sky130
 volare enable --pdk sky130 0fe599b2afb6708d281543108caf8310912f54af
 ```
 
+
+
+<img width="3970" height="2353" alt="pdk_installation1" src="https://github.com/user-attachments/assets/cf9aeaff-235b-4d0a-a17c-ea61be7bbce3" />
+<img width="3970" height="2278" alt="pdk_installation2" src="https://github.com/user-attachments/assets/04515db3-8c26-4c45-bfee-60cc56608dcf" />
+<img width="3970" height="2494" alt="pdk_installation3" src="https://github.com/user-attachments/assets/9c5812e0-a908-4b59-a782-1acf7d53427d" />
+<img width="3970" height="2494" alt="pdk_installation4" src="https://github.com/user-attachments/assets/c6e8d127-2eda-436c-b714-23c7b5cf2e9c" />
+<img width="3970" height="2494" alt="pdk_installation5" src="https://github.com/user-attachments/assets/df25f6a3-a8df-471a-9ad3-092346d5ec52" />
+
 Now that the pdks are also installed , now we need to make sure that the Iverilog version is 11.0 only , if any other version then we wont get the output
 
 In my case it is version 12.0 , so to change it from 12.0 to 11.0 , i have done the following 
@@ -253,6 +264,9 @@ mkdir gits
 cd gits
 git clone https://github.com/efabless/caravel_pico.git
 ```
+
+<img width="2502" height="721" alt="Screenshot from 2025-12-11 19-28-25" src="https://github.com/user-attachments/assets/4eed60b2-fb07-4166-8352-a6c03de220ae" />
+
 
 Now that we have setup all the files and required tool , now can run the simulation.
 
