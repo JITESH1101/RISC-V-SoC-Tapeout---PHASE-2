@@ -1,4 +1,4 @@
-# Caravel Housekeeping SPI (HKSPI) – Complete Technical Explanation and RTL-vs-GLS Verification Document
+# Caravel Housekeeping SPI (HKSPI) –  RTL-vs-GLS Verification with Sky130pdk
 
 ## 1. Introduction
 
