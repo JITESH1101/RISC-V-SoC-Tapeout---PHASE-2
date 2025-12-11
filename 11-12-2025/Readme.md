@@ -255,12 +255,3 @@ Through rigorous RTL and GLS comparison:
 The HKSPI module is confirmed to be **functionally correct**, synthesizable, and reliable across both RTL and gate-level domains.
 
 ---
-
-If you want, additional outputs can be generated:
-
-- A PDF-formatted version  
-- A diagram-rich version  
-- A short 1-page summary  
-- A version with block diagrams for HKSPI, Wishbone, and GPIO paths  
-
-Just ask!
