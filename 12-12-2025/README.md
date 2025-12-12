@@ -1,4 +1,4 @@
-# Day 1: RISC-V SoC Implementation (RTL to GLS) using SCL180 PDK
+# RISC-V SoC Implementation (RTL to GLS) using SCL180 PDK
 
 ## 1. Overview
 This repository documents the successful replication of the **vsdcaravel** RISC-V SoC implementation. The project involves the complete flow from Functional Simulation to Synthesis and Gate-Level Simulation (GLS) using the **SCL180 PDK** and **Synopsys Design Tools**.
