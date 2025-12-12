@@ -158,4 +158,25 @@ A dedicated `Makefile` was created in `gls/` to handle the specific include path
 | **Power Pins** | Logic 0 tied to `1'b0` instead of ground net. | Replaced `1'b0` with `vssa` in the netlist. |
 | **Timing Loops** | Combinational loops detected in `housekeeping` (wbbd_sck_reg) and `PLL`. | Tools automatically disabled timing arcs to break loops; noted for future static timing analysis. |
 
+
+
+- In RTL simulation , i have faced errors of ``pc3b01_wrapper.v`` has been observed having multiple files with different code but having same name for that i had to change the file and rename the instantiations in ``chip_io.v`` and include that file into it , so this error is fixed.
+
+![change1_rtl](https://github.com/user-attachments/assets/92553cb4-0484-4e9a-8233-46ff88f7ec95)
+
+![change2](https://github.com/user-attachments/assets/a280856a-6807-47ee-8486-036ea019a8ea)
+
+![wrapper](https://github.com/user-attachments/assets/a3b8cc91-b30b-43c8-a0fa-2184900ad9da)
+
+- In RTL simulation, i have also faced error for having wrong path in ``ring_osc2x13.v`` file , so i have updated it by linking it correctly to the pdk path
+
+![path_ring_osc](https://github.com/user-attachments/assets/8e14e048-d474-405c-b9a9-7c83ea8ca18b)
+
+
+---
+
+## 6. Conclusion
+
+From RTL to GLS , the simulations are done but as mentioned above the certain modules have issues with synthesis , which were made black boxes for GLS. this is the only reason for having small differences in the waveforms between RTL simulation and GLS simulation. The other parts of the waveforms show correct functionality saying that this mismatch is not actually a functionality issue but it is a synthesis issue which is to be fixed. So the design functionality is verified.
+
 ---
