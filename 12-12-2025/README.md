@@ -17,6 +17,19 @@ cd vsdRiscvScl180
 
 ![git_clone](https://github.com/user-attachments/assets/e2962ac2-7878-4b88-b769-b5accd04788e)
 
+Now we create a makefile for Rtl simulation 
+
+![make_rtl](https://github.com/user-attachments/assets/d17027f8-6907-4cb8-a49c-adb62b405f3b)
+
+here , we need to add the gcc path for that , to know where gcc is on our system , enter the following command
+
+```
+which gcc
+```
+
+![gcc_path](https://github.com/user-attachments/assets/0638af44-2ff2-40d0-99d1-21514a118b15)
+
+
 ---
 
 ## 2. Functional Simulation (RTL)
