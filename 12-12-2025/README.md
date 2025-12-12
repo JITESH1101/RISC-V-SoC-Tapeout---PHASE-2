@@ -129,9 +129,3 @@ A dedicated `Makefile` was created in `gls/` to handle the specific include path
 | **Timing Loops** | Combinational loops detected in `housekeeping` (wbbd_sck_reg) and `PLL`. | Tools automatically disabled timing arcs to break loops; noted for future static timing analysis. |
 
 ---
-
-## 6. Directory Structure (Evidence)
-
-* `dv/`: Functional verification scripts and logs.
-* `synthesis/`: Synthesized netlist and reports (Area, Power, QoR).
-* `gls/`: Modified netlist, Makefile, and GLS waveforms.
