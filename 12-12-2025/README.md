@@ -169,6 +169,7 @@ A dedicated `Makefile` was created in `gls/` to handle the specific include path
 ![wrapper](https://github.com/user-attachments/assets/a3b8cc91-b30b-43c8-a0fa-2184900ad9da)
 
 - In RTL simulation, i have also faced error for having wrong path in ``ring_osc2x13.v`` file , so i have updated it by linking it correctly to the pdk path
+  
 
 ![path_ring_osc](https://github.com/user-attachments/assets/8e14e048-d474-405c-b9a9-7c83ea8ca18b)
 
