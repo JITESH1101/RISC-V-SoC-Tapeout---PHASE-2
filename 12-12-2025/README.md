@@ -8,6 +8,15 @@ This repository documents the successful replication of the **vsdcaravel** RISC-
 * **Tools:** Synopsys DC, VCS/Icarus Verilog, GTKWave
 * **Reference:** [vsdip/vsdRiscvScl180](https://github.com/vsdip/vsdRiscvScl180/tree/iitgn)
 
+To get started , clone the following directory
+
+```
+git clone https://github.com/vsdip/vsdRiscvScl180.git
+cd vsdRiscvScl180
+```
+
+![git_clone](https://github.com/user-attachments/assets/e2962ac2-7878-4b88-b769-b5accd04788e)
+
 ---
 
 ## 2. Functional Simulation (RTL)
@@ -22,22 +31,27 @@ Verification of the Register-Transfer Level code was performed to ensure logical
     make clean
     make
     ```
+    
+![make](https://github.com/user-attachments/assets/a811b57a-d4f6-4930-a48c-a331a05c6b45)
+
+    
 4.  Executed the simulation using Icarus Verilog:
     ```bash
     vvp hkspi.vvp
     ```
+
+    ![rtl_pass](https://github.com/user-attachments/assets/d16b7af2-cb94-41de-ba2a-0d2a41661e2e)
+
 5.  Visualized the waveform:
     ```bash
     gtkwave hkspi.vcd hkspi_tb.v
     ```
+    ![rtl_waveform](https://github.com/user-attachments/assets/5d13f6aa-14e7-462f-8e51-4a4e8c43ae24)
+
 
 ### Results
 * **Console Output:** Successful execution confirmed.
 * **Waveform:** Validated correct behavior of the `hkspi` block.
-
-> **[Insert Screenshot of Functional Simulation Waveform Here]**
-> *Figure 1: Functional Simulation Waveform in GTKWave*
-
 ---
 
 ## 3. Synthesis (Synopsys DC)
@@ -49,28 +63,27 @@ The design was synthesized using Synopsys Design Compiler with the SCL180 PDK.
 * **Command:** `dc_shell -f ../synth.tcl`.
 * **Output:** Generated `vsdcaravel_synthsis.v` netlist.
 
+![synthesis_pass](https://github.com/user-attachments/assets/27acffcd-d41c-4283-907a-50b48f5f79fd)
+
+![schematic](https://github.com/user-attachments/assets/3405fe1b-5395-480c-a6f9-c07499a1d0b2)
+
 ### Synthesis Reports
 Below are the key metrics extracted from the post-synthesis reports.
 
 #### 1. Area Report
-* **Total Cell Area:** 773,088.68
-* **Total Design Area:** 805,879.78
-* **Cell Count:** 30,961
-* **Combinational Area:** ~341,952
-* **Sequential Area:** ~431,036
-* **Black Boxes:** 16 (Includes RAM128, housekeeping).
+
+![area](https://github.com/user-attachments/assets/b422df14-b5b3-4ce4-a800-449fbd0a2501)
+
 
 #### 2. Power Report (Estimates)
-* **Total Dynamic Power:** 76.59 mW
-* **Cell Internal Power:** 38.62 mW (50%)
-* **Net Switching Power:** 37.97 mW (50%)
-* **Leakage Power:** 1.13 µW.
+
+![power](https://github.com/user-attachments/assets/3128742c-d506-4ee3-ab78-83482d1443e2)
+
 
 #### 3. Quality of Results (QoR)
-* **Timing Path Group:** (none)
-* **Critical Path Slack:** 0.00
-* **Violating Paths:** 0
-* **Note:** Several timing loops were detected and disabled during optimization (specifically in `housekeeping` and `PLL` modules).
+
+![qor](https://github.com/user-attachments/assets/dfa33a76-88bc-4676-bcf8-ddd4fe2208f6)
+
 
 ---
 
@@ -98,6 +111,8 @@ To enable GLS, specific modifications were made to the directory structure and t
 **3. Makefile Configuration:**
 A dedicated `Makefile` was created in `gls/` to handle the specific include paths (`-I`) and module search paths (`-y`) for the PDK, IO wrappers, and RTL.
 
+
+
 ### Execution
 1.  Navigate to `gls/`.
 2.  Run the simulation:
@@ -106,17 +121,19 @@ A dedicated `Makefile` was created in `gls/` to handle the specific include path
     make
     vvp hkspi.vvp
     ```
+  ![gls_pass](https://github.com/user-attachments/assets/6c258331-f6a9-4a8f-b635-d32b2c297c73)
+
+    
 3.  Visualize results:
     ```bash
     gtkwave hkspi.vcd hkspi_tb.v
     ```
+![gls_waveform](https://github.com/user-attachments/assets/304a5f7c-e163-45c5-88a8-99573c58c32f)
+
 
 ### Results
 * The GLS waveform matched the Functional Simulation waveform.
 * Critical paths showed no unknown (`X`) states.
-
-> **[Insert Screenshot of GLS Waveform Here]**
-> *Figure 2: Gate-Level Simulation Waveform in GTKWave*
 
 ---
 
