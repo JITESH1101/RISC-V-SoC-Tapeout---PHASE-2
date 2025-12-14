@@ -8,7 +8,7 @@ This project moves beyond guided execution into independent research-driven impl
 
 ### Key Research Goals
 
-- **Complete Toolchain Migration**: Replacement of Icarus Verilog and GTKWave with Synopsys VCS and DVE/Verdi.
+- **Toolchain Migration**: Replacement of Icarus Verilog  with Synopsys VCS and GTKWave is used for analysing the waveform.
 
 - **Topological Synthesis**: Implementation of DC_TOPO synthesis strategies using `compile_ultra` with careful handling of analog/mixed-signal macros.
 
@@ -37,10 +37,6 @@ mkdir -p gls
 mkdir -p synthesis/output
 mkdir -p synthesis/report
 mkdir -p dv/hkspi/tmp
-
-# Initialize git tracking
-git init
-git checkout -b iitgn
 ```
 
 ### File Manifest
@@ -56,12 +52,12 @@ git checkout -b iitgn
 
 ## 3. Toolchain Migration Strategy
 
-In compliance with the mandatory removal of open-source tools[^8], the following components were scrubbed from all scripts, Makefiles, and documentation:
+In compliance with the mandatory removal of open-source tools, the following components were scrubbed from all scripts, Makefiles, and documentation:
 
 | Legacy Component | Status | Replacement Tool | Version Used |
 |---|---|---|---|
 | iverilog | REMOVED | Synopsys VCS | U-2023.03 |
-| gtkwave | REMOVED | Synopsys DVE / Verdi | U-2023.03 |
+| gtkwave | used | Synopsys DVE / Verdi | not installed |
 | yosys | REMOVED | Synopsys DC_TOPO | T-2022.03-SP5 |
 
 ---
@@ -70,13 +66,12 @@ In compliance with the mandatory removal of open-source tools[^8], the following
 
 ### 4.1. Prerequisites & Environment Setup
 
-Before executing simulation, the environment was configured to point to the SCL180 PDK and the Synopsys license servers.
 
 **Source Synopsys Tools:**
 
 ```bash
-source /path/to/synopsys/cshrc
-source toolRC_iitgntapeout
+csh
+source ~/toolRC_iitgntapeout
 ```
 
 **Verify GCC Toolchain**: Used `riscv32-unknown-elf-gcc` for compiling the firmware (hex files).
@@ -275,11 +270,10 @@ make debug
 
 ## 7. Synopsys SolvNet References
 
-As mandated[^11], Synopsys SolvNet was utilized for:
+As mandated, Synopsys SolvNet was utilized for:
 
 - **VCS Error Codes**: Looking up Error-[IND] to understand stricter SystemVerilog variable declaration rules compared to iverilog
 - **DC Blackbox Flows**: Researching the correct usage of `is_black_box` attributes vs `set_dont_touch` to ensure macros were not optimized away
-- **OTP Resolution**: Collaborated via WhatsApp for real-time OTP access when SolvNet credentials required 2FA[^12]
 
 ---
 
