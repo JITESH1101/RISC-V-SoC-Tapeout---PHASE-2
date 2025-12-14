@@ -294,39 +294,4 @@ This task successfully demonstrated the migration of vsdcaravel to a pure Synops
 
 ---
 
-## Quick Reference Commands
 
-```bash
-# Setup
-mkdir -p Task_VCS_DC_TOPO && cd Task_VCS_DC_TOPO
-git init && git checkout -b iitgn
-mkdir -p rtl gls synthesis/{output,report} dv/hkspi/tmp
-
-# Simulation
-cd dv/hkspi && make clean && make compile && make gui
-
-# Synthesis
-cd synthesis && dc_shell -f synth.tcl | tee synthesis_complete.log
-
-# GLS
-cp dv/hkspi/hkspi.hex . && make simv
-```
-
----
-
-## License & Documentation
-
-For additional documentation and detailed specifications, refer to the SCL180 PDK documentation and Synopsys tool user guides.
-
-[^1]: Synopsys EDA Tools for RTL-to-GDSII flow
-[^2]: Research-driven implementation beyond guided execution
-[^3]: No open-source simulation tools policy
-[^4]: VCS and DVE/Verdi replacement for iverilog/gtkwave
-[^5]: DC_TOPO with compile_ultra optimization
-[^6]: Tcl-based blackbox preservation methodology
-[^7]: Synopsys SolvNet knowledge base utilization
-[^8]: Mandatory removal of open-source tools
-[^9]: Preservation of POR and RAM macros as blackboxes
-[^10]: Gate-Level Simulation for functional verification
-[^11]: SolvNet usage mandate
-[^12]: OTP access for 2FA credentials
