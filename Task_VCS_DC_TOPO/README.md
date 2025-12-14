@@ -1,20 +1,20 @@
-# RISC-V SoC Research Task: Industry-Grade Synopsys VCS + DC_TOPO Flow (SCL180)
+# RISC-V SoC Research Task: Synopsys VCS + DC_TOPO Flow (SCL180 PDK)
 
 ## 1. Project Objective & Research Scope
 
-The primary objective of this research task is to transition the vsdcaravel SoC design flow from an open-source educational environment to a robust, industry-standard RTL-to-GDSII flow using Synopsys EDA tools[^1].
+The primary objective of this research task is to transition the vsdcaravel SoC design flow from an open-source educational environment to a robust, industry-standard RTL-to-GDSII flow using Synopsys EDA tools.
 
-This project moves beyond guided execution into independent research-driven implementation[^2]. The focus is on establishing a clean, error-free synthesis and simulation environment using the SCL180 PDK, ensuring design correctness through rigorous Gate-Level Simulation (GLS) while strictly adhering to the "No Open-Source Simulation Tools" policy[^3].
+This project moves beyond guided execution into independent research-driven implementation. The focus is on establishing a clean, error-free synthesis and simulation environment using the SCL180 PDK, ensuring design correctness through rigorous Gate-Level Simulation (GLS) while strictly adhering to the "No Open-Source Simulation Tools" policy.
 
 ### Key Research Goals
 
-- **Complete Toolchain Migration**: Replacement of Icarus Verilog and GTKWave with Synopsys VCS and DVE/Verdi[^4].
+- **Complete Toolchain Migration**: Replacement of Icarus Verilog and GTKWave with Synopsys VCS and DVE/Verdi.
 
-- **Topological Synthesis**: Implementation of DC_TOPO synthesis strategies using `compile_ultra` with careful handling of analog/mixed-signal macros[^5].
+- **Topological Synthesis**: Implementation of DC_TOPO synthesis strategies using `compile_ultra` with careful handling of analog/mixed-signal macros.
 
-- **Blackbox Preservation**: Developing a Tcl-based methodology to preserve Power-On-Reset (POR) and Memory macros as blackboxes during the synthesis phase[^6].
+- **Blackbox Preservation**: Developing a Tcl-based methodology to preserve Power-On-Reset (POR) and Memory macros as blackboxes during the synthesis phase.
 
-- **Knowledge Base Utilization**: Active usage of Synopsys SolvNet to resolve proprietary tool errors and licensing issues[^7].
+- **Knowledge Base Utilization**: Active usage of Synopsys SolvNet to resolve proprietary tool errors and licensing issues.
 
 ---
 
