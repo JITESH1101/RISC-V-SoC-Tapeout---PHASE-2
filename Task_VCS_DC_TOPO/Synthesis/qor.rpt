@@ -1,0 +1,86 @@
+Warning: Design 'vsdcaravel' has '5' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : qor
+Design : vsdcaravel
+Version: T-2022.03-SP5
+Date   : Sun Dec 14 17:12:27 2025
+****************************************
+
+
+  Timing Path Group 'hk_serial_clk'
+  -----------------------------------
+  Levels of Logic:               0.00
+  Critical Path Length:          0.18
+  Critical Path Slack:          49.03
+  Critical Path Clk Period:    100.00
+  Total Negative Slack:          0.00
+  No. of Violating Paths:        0.00
+  Worst Hold Violation:         -0.14
+  Total Hold Violation:        -24.64
+  No. of Hold Violations:      336.00
+  -----------------------------------
+
+
+  Cell Count
+  -----------------------------------
+  Hierarchical Cell Count:       1446
+  Hierarchical Port Count:      13054
+  Leaf Cell Count:              20486
+  Buf/Inv Cell Count:            4792
+  Buf Cell Count:                 572
+  Inv Cell Count:                4221
+  CT Buf/Inv Cell Count:           84
+  Combinational Cell Count:     16325
+  Sequential Cell Count:         4161
+  Macro Count:                      0
+  -----------------------------------
+
+
+  Area
+  -----------------------------------
+  Combinational Area:   287688.400931
+  Noncombinational Area:
+                        272964.344337
+  Buf/Inv Area:          66661.360715
+  Total Buffer Area:         30022.62
+  Total Inverter Area:       36704.60
+  Macro/Black Box Area:   1395.760063
+  Net Area:              20818.699198
+  -----------------------------------
+  Cell Area:            562048.505332
+  Design Area:          582867.204529
+
+
+  Design Rules
+  -----------------------------------
+  Total Number of Nets:         25905
+  Nets With Violations:            20
+  Max Trans Violations:             0
+  Max Cap Violations:              19
+  Max Fanout Violations:            1
+  -----------------------------------
+
+
+  Hostname: nanodc.iitgn.ac.in
+
+  Compile CPU Statistics
+  -----------------------------------------
+  Resource Sharing:                    8.83
+  Logic Optimization:                  6.74
+  Mapping Optimization:                9.83
+  -----------------------------------------
+  Overall Compile Time:               28.90
+  Overall Compile Wall Clock Time:    29.74
+
+  --------------------------------------------------------------------
+
+  Design  WNS: 0.00  TNS: 0.00  Number of Violating Paths: 0
+
+
+  Design (Hold)  WNS: 0.14  TNS: 24.64  Number of Violating Paths: 336
+
+  --------------------------------------------------------------------
+
+
+1
