@@ -89,19 +89,126 @@ The Makefile located in `dv/hkspi/` was rewritten from scratch. Unlike Icarus Ve
 - **`-lca`**: Limited Customer Availability features (often required for specific PDK features).
 - **`+incdir+`**: Replaces `-I` for defining include directories.
 
-#### Final Makefile (Snippets):
+#### Final Makefile :
 
 ```makefile
-# VCS Compilation Targets
+# SPDX-FileCopyrightText: 2020 Efabless Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# removing pdk path as everything has been included in one whole directory for this example.
+# PDK_PATH = $(PDK_ROOT)/$(PDK)
+scl_io_PATH = "/home/Synopsys/pdk/SCL_PDK_3/SCLPDK_V3.0_KIT/scl180/iopad/cio250/6M1L/verilog/tsl18cio250/zero"
+VERILOG_PATH = ../../
+RTL_PATH = $(VERILOG_PATH)/rtl
+BEHAVIOURAL_MODELS = ../ 
+RISCV_TYPE ?= rv32imc
+
+FIRMWARE_PATH = ../
+GCC_PATH?=/usr/bin/gcc
+GCC_PREFIX?=riscv32-unknown-elf
+
+SIM_DEFINES = +define+FUNCTIONAL +define+SIM
+
+SIM?=RTL
+
+.SUFFIXES:
+
+PATTERN = hkspi
+
+# Path to management SoC wrapper repository
+scl_io_wrapper_PATH ?= $(RTL_PATH)/scl180_wrapper
+
+# VCS compilation options
+VCS_FLAGS = -sverilog +v2k -full64 -debug_all -lca -timescale=1ns/1ps
+VCS_INCDIR = +incdir+$(BEHAVIOURAL_MODELS) \
+             +incdir+$(RTL_PATH) \
+             +incdir+$(scl_io_wrapper_PATH) \
+             +incdir+$(scl_io_PATH)
+
+# Output files
+SIMV = simv
+COMPILE_LOG = compile.log
+SIM_LOG = simulation.log
+
+.SUFFIXES:
+
+all: compile
+
+hex: ${PATTERN:=.hex}
+
+# VCS Compilation target
 compile: ${PATTERN}_tb.v ${PATTERN}.hex
 	vcs $(VCS_FLAGS) $(SIM_DEFINES) $(VCS_INCDIR) \
 	${PATTERN}_tb.v \
 	-l $(COMPILE_LOG) \
 	-o $(SIMV)
 
-# GUI Execution Target
+# Run simulation in batch mode
+sim: compile
+	./$(SIMV) -l $(SIM_LOG)
+
+# Run simulation with GUI (DVE)
 gui: compile
 	./$(SIMV) -gui -l $(SIM_LOG) &
+
+# Generate VPD waveform
+vpd: compile
+	./$(SIMV) -l $(SIM_LOG)
+	@echo "VPD waveform generated. View with: dve -vpd vcdplus.vpd &"
+
+# Generate FSDB waveform (if Verdi is available)
+fsdb: compile
+	./$(SIMV) -l $(SIM_LOG)
+	@echo "FSDB waveform generated. View with: verdi -ssf <filename>.fsdb &"
+
+#%.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.s
+#	${GCC_PATH}/${GCC_PREFIX}-gcc -march=$(RISCV_TYPE) -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -o $@ $(FIRMWARE_PATH)/start.s $<
+
+#%.hex: %.elf
+#	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
+	# to fix flash base address
+#	sed -i 's/@10000000/@00000000/g' $@
+
+#%.bin: %.elf
+#	${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
+
+check-env:
+#ifndef PDK_ROOT
+#	$(error PDK_ROOT is undefined, please export it before running make)
+#endif
+#ifeq (,$(wildcard $(PDK_ROOT)/$(PDK)))
+#	$(error $(PDK_ROOT)/$(PDK) not found, please install pdk before running make)
+#endif
+ifeq (,$(wildcard $(GCC_PATH)/$(GCC_PREFIX)-gcc ))
+	$(error $(GCC_PATH)/$(GCC_PREFIX)-gcc is not found, please export GCC_PATH and GCC_PREFIX before running make)
+endif
+# check for efabless style installation
+ifeq (,$(wildcard $(PDK_ROOT)/$(PDK)/libs.ref/*/verilog))
+#SIM_DEFINES := ${SIM_DEFINES} +define+EF_STYLE
+endif
+
+# ---- Clean ----
+
+clean:
+	rm -f $(SIMV) *.log *.vpd *.fsdb *.key
+	rm -rf simv.daidir csrc DVEfiles verdiLog novas.* *.fsdb+
+	rm -rf AN.DB
+
+.PHONY: clean compile sim gui vpd fsdb all check-env
+
 ```
 
 ### 4.3. Issue Resolution (Research Log)
@@ -138,10 +245,19 @@ To verify the functionality of the SoC:
 cd dv/hkspi
 make clean
 make compile
-make gui
+make sim
+gtkwave hkspi.vcd hkspi_tb.v
 ```
 
+![WhatsApp Image 2025-12-14 at 5 24 19 PM(5)](https://github.com/user-attachments/assets/05647334-4517-45cc-9808-90b104a38df2)
+
+![WhatsApp Image 2025-12-14 at 5 24 19 PM(6)](https://github.com/user-attachments/assets/f9cf1d78-33b8-4ce6-b4e4-3928e5748e01)
+
+
 **Outcome**: The waveform correctly displayed the SPI functionality, matching the golden reference behavior.
+
+![WhatsApp Image 2025-12-14 at 5 24 19 PM(7)](https://github.com/user-attachments/assets/e2d22d6b-c82f-49c7-862b-8f3f58fe2253)
+
 
 ---
 
@@ -200,7 +316,8 @@ set_attribute [get_designs RAM128] is_black_box true
 #### 5. Optimization:
 
 ```tcl
-compile_ultra -incremental
+compile_ultra -topographical -effort high   
+compile -incremental -map_effort high
 ```
 
 **Why**: `compile_ultra` performs high-effort optimization for timing and area. `-incremental` is used for topological refinement.
@@ -212,6 +329,9 @@ Execute the following command in the `synthesis/` directory:
 ```bash
 dc_shell -f synth.tcl | tee synthesis_complete.log
 ```
+
+![WhatsApp Image 2025-12-14 at 5 24 19 PM(9)](https://github.com/user-attachments/assets/d0a639cd-0fdb-4f8e-80b1-943afbc0d638)
+
 
 ### 5.4. Generated Reports
 
@@ -237,15 +357,6 @@ We must "stitch" the design back together for simulation.
 - **Standard Cells**: Come from the SCL180 PDK Verilog models
 - **Blackboxes**: The original RTL for RAM128, RAM256, and por is linked back in so the simulation works
 
-#### Modified VCS Command for GLS:
-
-```makefile
-vcs -full64 -debug_access+all +define+GL \
-    +incdir+$(VERILOG_PATH)/synthesis/output \  # Point to Netlist
-    +incdir+$(PDK_PATH) \                       # Point to Std Cell Models
-    $(GL_PATH)/defines.v \
-    ...
-```
 
 ### 6.3. Execution & Validation
 
@@ -256,15 +367,23 @@ cp dv/hkspi/hkspi.hex .
 
 Run GLS:
 ```bash
-make simv
+vcs -full64 -sverilog -timescale=1ns/1ps -debug_access+all +define+FUNCTIONAL+SIM+GL +notimingchecks hkspi_tb.v +incdir+../synthesis/output +incdir+/home/Synopsys/pdk/SCL_PDK_3/SCLPDK_V3.0_KIT/scl180/iopad/cio250/4M1L/verilog/tsl18cio250/zero +incdir+/home/Synopsys/pdk/SCL_PDK_3/SCLPDK_V3.0_KIT/scl180/stdcell/fs120/4M1IL/verilog/vcs_sim_model -o simv
 ```
 
-Debug:
+![WhatsApp Image 2025-12-14 at 5 24 16 PM(2)](https://github.com/user-attachments/assets/bd0abf57-0bab-4d4d-9dc4-f0f225e4e11e)
+
+output:
 ```bash
-make debug
+./simv
 ```
+
+![WhatsApp Image 2025-12-14 at 5 24 16 PM(2)](https://github.com/user-attachments/assets/2a6fd71e-a32f-4b05-a4cf-f8ec49af7c18)
+
 
 **Result**: The GLS waveforms showed zero X-propagation (unknown states) on the wishbone bus, confirming the netlist is functionally equivalent to the RTL.
+
+![WhatsApp Image 2025-12-14 at 5 24 19 PM(1)](https://github.com/user-attachments/assets/eb35ed44-68fb-4ca4-8c55-6106fd3e7f0a)
+
 
 ---
 
@@ -285,6 +404,8 @@ This task successfully demonstrated the migration of vsdcaravel to a pure Synops
 ✅ **DC_TOPO** provides a physical-aware synthesized netlist  
 ✅ Documentation is fully compliant, with no traces of open-source tools  
 ✅ The design is now ready for Physical Design (Place & Route) with clean, verified netlists and preserved macros
+✅ All relevant files with changes made and reports are attached to this repo.
+
 
 ---
 
