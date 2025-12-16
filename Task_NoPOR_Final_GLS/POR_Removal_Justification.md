@@ -175,8 +175,6 @@ The open-source SkyWater SKY130 (130nm CMOS) provides industry validation of ext
 
 ## 8. Conclusion
 
-**Technical Justification Summary**
-
 1. **POR is analog**: On-chip POR inherently vulnerable to process variation (±100-200mV), temperature drift (±20-50mV), supply transients. Analog design burden should not be on ASIC team.
 
 2. **RTL POR is unsafe**: Metastability hazards in reset domain crossing cannot be fully verified. Risk is unacceptable.
@@ -186,9 +184,5 @@ The open-source SkyWater SKY130 (130nm CMOS) provides industry validation of ext
 4. **External reset proven**: Industry standard across SKY130, commercial 130nm, and 180nm nodes. Thousands of production designs validate approach.
 
 5. **Risks mitigated**: Watchdog timer, multi-source reset, formal verification of synchronizers, and comprehensive STA sign-off address all identified failure modes.
-
-**Recommendation**
-
-External reset via SCL-180 I/O pads is **approved as the reset implementation strategy**. This approach is technically superior to on-chip analog POR, eliminates design burden, and is backed by industry precedent and proven methodology.
 
 ---
