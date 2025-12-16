@@ -1,10 +1,8 @@
 # VSD Caravel Power-On-Reset (POR) Dependency Analysis - Phase-1 Report
 
 **Project**: vsdCaravel / Openframe RISC-V SoC (SCL180 PDK)  
-**Analysis Type**: Power-On-Reset Infrastructure Study (Research Phase)  
-**Status**: ✅ Phase-1 Complete  
-**Date**: December 15, 2025  
-**Version**: 2.0
+**Analysis Type**: Power-On-Reset Study (Research Phase)   
+**Date**: December 15, 2025 
 
 ---
 
