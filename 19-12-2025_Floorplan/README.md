@@ -146,6 +146,8 @@ read_verilog -top $DESIGN_NAME \
   "/path/to/vsdcaravel_synthesis.v"
 current_design $DESIGN_NAME
 ```
+<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-14-31" src="https://github.com/user-attachments/assets/92ad6948-197b-4afa-93f3-43a157bac7b7" />
+
 
 Loads the pre-synthesized netlist. Unresolved hierarchies (if any) are acceptable at floorplan stage—we're establishing die geometry, not validating timing.
 
@@ -165,7 +167,11 @@ create_placement_blockage \
 # ... (repeat for TOP, LEFT, RIGHT)
 ```
 
+
 This phase creates all spatial constraints. **No placement or routing commands follow.**
+
+<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-15-03" src="https://github.com/user-attachments/assets/ac9e05f9-c250-4b4f-8c48-86ba70732eb2" />
+
 
 ### Phase 5️⃣ - Verification & Reporting
 
@@ -178,6 +184,9 @@ redirect -file ../reports/floorplan_report.txt {
     get_ports
 }
 ```
+
+<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-15-03" src="https://github.com/user-attachments/assets/d3bef652-0b48-4416-87e1-9f73e7fda284" />
+
 
 Generates audit trail documenting die/core extents and port list for downstream verification.
 
@@ -192,6 +201,10 @@ After script execution, ports are auto-placed using:
 ```tcl
 place_ports -self
 ```
+<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-20-26" src="https://github.com/user-attachments/assets/0888a276-4af8-4e30-b475-4366e5bf8e30" />
+
+<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-20-14" src="https://github.com/user-attachments/assets/d6ec434a-0eb3-4257-b81f-adc53953ca4e" />
+
 
 This command:
 - Analyzes top-level port list
