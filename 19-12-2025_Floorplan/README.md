@@ -75,6 +75,11 @@ initialize_floorplan \
     -core_offset {200 200 200 200}
 ```
 
+<img width="1680" height="1050" alt="floorplan_init" src="https://github.com/user-attachments/assets/85f1b30d-6c21-4406-9b35-4e656a99723e" />
+
+<img width="1680" height="1050" alt="power ground_connections" src="https://github.com/user-attachments/assets/b22c11f6-2387-4e24-877b-b63968176782" />
+
+
 This creates a rectangular die with inset core, leaving 200 µm perimeter for IO infrastructure.
 
 ### IO Region Reservation
@@ -108,6 +113,7 @@ Four **hard placement blockages** prevent standard-cell intrusion into IO bands:
 | Right | [3488, 100] → [3588, 5088] | 100 µm × core height |
 
 Each blockage is declared as `type hard`, creating permanent no-placement zones.
+
 
 ---
 
@@ -192,6 +198,11 @@ After script execution, ports are auto-placed using:
 ```tcl
 place_ports -self
 ```
+
+<img width="1680" height="1050" alt="placepins" src="https://github.com/user-attachments/assets/531f0530-298b-4f59-b492-f313f2745de3" />
+
+<img width="1680" height="1050" alt="placepins" src="https://github.com/user-attachments/assets/e53c75db-06c7-43b2-a74c-9dc85de633c4" />
+
 
 This command:
 - Analyzes top-level port list
