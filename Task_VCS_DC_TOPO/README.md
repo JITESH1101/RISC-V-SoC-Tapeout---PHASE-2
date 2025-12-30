@@ -396,7 +396,40 @@ As mandated, Synopsys SolvNet was utilized for:
 
 ---
 
-## 8. Conclusion
+## 8. Other Test cases
+
+After verifying the correct functionality of HKSPI , the following tests for GPIO , IRQ , STORAGE , MPRJ_CTRL are done but due to not properly changing the SoC design from sky130A pdk to Scl180nm and some of the wrapper modules not working correctly causing failure in the simulations , also it is observed that the signals for the failed modules are having high impedance , showing that the signals are not driven properly.
+
+- GPIO
+
+<img width="1680" height="1050" alt="gpio_compile" src="https://github.com/user-attachments/assets/5f1b70f6-1f6a-4727-a789-76198891a9dc" />
+
+<img width="1680" height="1050" alt="gpio_Sim" src="https://github.com/user-attachments/assets/d226ab4c-0e73-4dfe-b6c3-94dc9fb50eaa" />
+
+- MPRJ_CTRL
+
+<img width="1680" height="1050" alt="mprj_Ctrl_compile" src="https://github.com/user-attachments/assets/2448e77d-dde8-4957-ba40-fe98e5c963d4" />
+
+<img width="1680" height="1050" alt="mprj_ctrl_sim" src="https://github.com/user-attachments/assets/cc6f81a0-fd5c-4998-ab7e-6a9e1658b3a1" />
+
+- STORAGE
+
+<img width="1680" height="1050" alt="storage_compile" src="https://github.com/user-attachments/assets/76581c27-4247-429f-924a-e129867fa55d" />
+
+<img width="1680" height="1050" alt="storage_sim" src="https://github.com/user-attachments/assets/48d0720e-a4ad-4b72-bd6a-f55dc0827e66" />
+
+
+- IRQ
+
+<img width="1680" height="1050" alt="irq_compile" src="https://github.com/user-attachments/assets/7fb2eeb6-16d7-4f65-9b85-c47f4e36d1c1" />
+
+<img width="1680" height="1050" alt="irq_sim" src="https://github.com/user-attachments/assets/eb888985-8bb1-4814-a2b9-b36a71712ea2" />
+
+
+
+---
+
+## 9. Conclusion
 
 This task successfully demonstrated the migration of vsdcaravel to a pure Synopsys flow:
 
