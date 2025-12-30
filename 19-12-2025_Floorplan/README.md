@@ -56,6 +56,13 @@ gui_show_man_page      # Optional: visualize floorplan
 
 ## 📐 Technical Specifications
 
+### Clock
+
+The external clock period is updated to 100Mhz (10ns)
+
+<img width="1299" height="517" alt="clk_100mhz" src="https://github.com/user-attachments/assets/1e7bcaf1-f839-49a7-aec2-14fc7cc415f0" />
+
+
 ### Die & Core Configuration
 
 The floorplan uses **absolute coordinate definition** for reproducibility:
@@ -201,7 +208,13 @@ place_ports -self
 
 <img width="1680" height="1050" alt="placepins" src="https://github.com/user-attachments/assets/531f0530-298b-4f59-b492-f313f2745de3" />
 
-<img width="1680" height="1050" alt="placepins" src="https://github.com/user-attachments/assets/e53c75db-06c7-43b2-a74c-9dc85de633c4" />
+<img width="1680" height="1050" alt="Place_IO_blockage" src="https://github.com/user-attachments/assets/edb8827f-9c01-4c74-ae41-3d671c86d2fa" />
+
+
+<img width="1680" height="1050" alt="place_pins1" src="https://github.com/user-attachments/assets/6219bd7e-fc7f-456a-b94a-e10c61102ac0" />
+
+
+
 
 
 This command:
@@ -231,6 +244,26 @@ Expected visualization shows:
 - ✓ Blue core region rectangle
 - ✓ Gray shaded blockage areas (IO regions)
 - ✓ Port markers along four edges
+
+
+We can also add halo around the macro as follows
+
+<img width="1680" height="1050" alt="create_halo" src="https://github.com/user-attachments/assets/e4f722e3-3dd7-4334-a0ed-9d60a1ca2e49" />
+
+
+
+We can also source the entire floorplan using a tcl script into icc2_shell
+
+<img width="1680" height="1050" alt="floorplan_tcl_run" src="https://github.com/user-attachments/assets/868b5b9d-7ed8-4852-978c-791e6b1e3621" />
+
+To write a def file after floorplanning , the following command is used
+
+```
+write_def raven_Wrapper.floorplan.def
+```
+
+<img width="1680" height="1050" alt="write_def" src="https://github.com/user-attachments/assets/3edfed33-0cad-4910-876c-f41d610c9c0e" />
+
 
 ---
 
