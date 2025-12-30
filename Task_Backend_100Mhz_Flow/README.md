@@ -622,6 +622,10 @@ Power planning phase produces:
 
 3. **Savepoint:** `post_power` block label
 
+After this stage a def file is generated to give as input for synthesis for this design to perform DC_TOPO synthesis 
+
+<img width="1680" height="1050" alt="def_file" src="https://github.com/user-attachments/assets/49e8502f-ffd3-4afd-8d35-5b119426534a" />
+
 ---
 
 ### Phase 3: Standard Cell Placement
@@ -1755,6 +1759,10 @@ save_block -hier -force   -label post_route
 save_lib -all
 
 ```
+
+Final log  image of the design is as follows
+
+<img width="1680" height="1050" alt="final_output" src="https://github.com/user-attachments/assets/63799502-3a43-40df-9256-d058e8caabe1" />
 
 ---
 
