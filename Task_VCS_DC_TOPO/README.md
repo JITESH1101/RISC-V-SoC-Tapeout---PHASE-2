@@ -396,7 +396,7 @@ As mandated, Synopsys SolvNet was utilized for:
 
 ---
 
-## 8. Other Test cases
+## 8. Other Test cases Failed
 
 After verifying the correct functionality of HKSPI , the following tests for GPIO , IRQ , STORAGE , MPRJ_CTRL are done but due to not properly changing the SoC design from sky130A pdk to Scl180nm and some of the wrapper modules not working correctly causing failure in the simulations , also it is observed that the signals for the failed modules are having high impedance , showing that the signals are not driven properly.
 
