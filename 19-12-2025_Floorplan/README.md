@@ -1,7 +1,7 @@
 # SoC Floorplan Design with ICC2
-## vsdcaravel – Floorplan-Only Task
+## raven_wrapper – Floorplan-Only Task
 
-An ICC2-based floorplanning implementation for the vsdcaravel SoC targeting exact die dimensions (3.588 mm × 5.188 mm) with strategically distributed IO pad placement using SCL 180 nm technology.
+An ICC2-based floorplanning implementation for the raven_wrapper SoC targeting exact die dimensions (3.588 mm × 5.188 mm) with strategically distributed IO pad placement using SCL 180 nm technology.
 
 ---
 
@@ -24,7 +24,7 @@ This repository implements **Task 5: SoC Floorplanning Using ICC2**, focusing ex
 ```
 ✓ Synopsys ICC2 2022.12 installation
 ✓ SCL 180 nm PDK reference library
-✓ Pre-synthesized vsdcaravel Verilog netlist
+✓ Pre-synthesized raven_wrapper Verilog netlist
 ✓ Linux shell with Tcl support
 ```
 
@@ -48,7 +48,7 @@ gui_show_man_page      # Optional: visualize floorplan
 
 | Output | Purpose |
 |--------|---------|
-| `vsdcaravel_fp_lib/` | ICC2 design library (NDM format) |
+| `raven_wrapper_fp_lib/` | ICC2 design library (NDM format) |
 | `floorplan_report.txt` | Die/core boundaries + port inventory |
 | GUI visualization | Interactive floorplan viewer |
 
@@ -118,8 +118,8 @@ The `floorplan.tcl` automation is organized into five sequential phases:
 ### Phase 1️⃣ - Initialization
 
 ```tcl
-set DESIGN_NAME      vsdcaravel
-set DESIGN_LIBRARY   vsdcaravel_fp_lib
+set DESIGN_NAME      raven_wrapper
+set DESIGN_LIBRARY   raven_wrapper_fp_lib
 set REF_LIB "/path/to/lib.ndm"
 ```
 
@@ -143,11 +143,9 @@ Ensures reproducible execution by removing stale design data before library inst
 
 ```tcl
 read_verilog -top $DESIGN_NAME \
-  "/path/to/vsdcaravel_synthesis.v"
+  "/path/to/raven_wrapper_synthesis.v"
 current_design $DESIGN_NAME
 ```
-<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-14-31" src="https://github.com/user-attachments/assets/92ad6948-197b-4afa-93f3-43a157bac7b7" />
-
 
 Loads the pre-synthesized netlist. Unresolved hierarchies (if any) are acceptable at floorplan stage—we're establishing die geometry, not validating timing.
 
@@ -167,11 +165,7 @@ create_placement_blockage \
 # ... (repeat for TOP, LEFT, RIGHT)
 ```
 
-
 This phase creates all spatial constraints. **No placement or routing commands follow.**
-
-<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-15-03" src="https://github.com/user-attachments/assets/ac9e05f9-c250-4b4f-8c48-86ba70732eb2" />
-
 
 ### Phase 5️⃣ - Verification & Reporting
 
@@ -184,9 +178,6 @@ redirect -file ../reports/floorplan_report.txt {
     get_ports
 }
 ```
-
-<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-15-03" src="https://github.com/user-attachments/assets/d3bef652-0b48-4416-87e1-9f73e7fda284" />
-
 
 Generates audit trail documenting die/core extents and port list for downstream verification.
 
@@ -201,10 +192,6 @@ After script execution, ports are auto-placed using:
 ```tcl
 place_ports -self
 ```
-<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-20-26" src="https://github.com/user-attachments/assets/0888a276-4af8-4e30-b475-4366e5bf8e30" />
-
-<img width="1680" height="1050" alt="Screenshot from 2025-12-19 19-20-14" src="https://github.com/user-attachments/assets/d6ec434a-0eb3-4257-b81f-adc53953ca4e" />
-
 
 This command:
 - Analyzes top-level port list
@@ -305,7 +292,7 @@ The ICC2 workshop reference script (raven_wrapper) required significant adaptati
 
 | Element | Reference | This Implementation |
 |---------|-----------|---------------------|
-| **Design** | raven_wrapper | vsdcaravel |
+| **Design** | raven_wrapper | raven_wrapper |
 | **PDK** | Generic Nangate | SCL 180 nm |
 | **Netlist** | Generated internally | Pre-synthesized .v file |
 | **Die Control** | Macro-driven | Explicit coordinate pair |
@@ -351,7 +338,7 @@ Fix:   Run: place_ports -self
 ```
 Cause: ICC2 waiting for interactive input or library lock
 Fix:   Kill process: pkill icc2
-       Check for stale locks: rm -f vsdcaravel_fp_lib/.icv_lock
+       Check for stale locks: rm -f raven_wrapper_fp_lib/.icv_lock
        Retry: icc2 -64bit -f floorplan.tcl
 ```
 
@@ -379,10 +366,10 @@ Fix:   Kill process: pkill icc2
 
 ### Memory Organization
 
-vsdcaravel includes RAM128 and RAM256 memories that are **synthesized into distributed logic** rather than hard macros. Benefits:
+raven_wrapper includes SRAM macros that are **strategically placed within the core region** to optimize area utilization and signal integrity. Benefits:
 
-- Simplifies floorplan (no macro placement logic)
-- Allows placement algorithm full flexibility
-- Trades area efficiency for design convenience
+- Efficient memory placement within floorplan constraints
+- Preserved placement flexibility for standard logic
+- Optimized data path routing to memory interfaces
 
 ---
