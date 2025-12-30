@@ -616,13 +616,6 @@ Power planning phase produces:
 
 3. **Savepoint:** `post_power` block label
 
-#### Duration and Resources
-
-- **Runtime:** ~10 minutes
-- **Memory Peak:** ~2.8 GB
-- **Power Stripes Created:** 200+ (VDD and VSS combined)
-- **Via Arrays:** 1,500+ via instances
-
 ---
 
 ### Phase 3: Standard Cell Placement
@@ -689,9 +682,17 @@ Congestion prediction tools estimate routing demand across different regions, id
 
 **Cell Placement Result:** Shows the complete placement of 45,000+ standard cells across the core area with color-coded cell types and density visualization.
 
+<img width="1680" height="1050" alt="placement" src="https://github.com/user-attachments/assets/2051e3d5-0b7a-4246-9ddc-7934a6e1edbf" />
+
+
 #### Placement Execution Log
 
 The placement process generates logs showing cell placement statistics, optimization iterations, quality of results metrics, and convergence information.
+
+<img width="1680" height="1050" alt="placement_log1" src="https://github.com/user-attachments/assets/896ece61-bd81-4213-bf08-45c8ab2e9724" />
+
+<img width="1680" height="1050" alt="placement_log2" src="https://github.com/user-attachments/assets/b0cd57bf-a68a-4ff4-afe2-159324c96c4c" />
+
 
 #### Placement Final QoR
 
@@ -780,9 +781,20 @@ Clock tree wires are routed on higher metal layers to minimize interaction with 
 
 **Multi-Domain Clock Trees:** Detailed view showing the three independent clock trees for ext_clk, pll_clk, and spi_sck domains with balanced H-tree topology.
 
+<img width="1680" height="1050" alt="cts1" src="https://github.com/user-attachments/assets/cd5c896e-706d-4e18-8a89-4389216a9b13" />
+
+<img width="1680" height="1050" alt="cts2" src="https://github.com/user-attachments/assets/03ccfaa8-be84-4662-9b16-c4a61fafe223" />
+
+
+
 #### CTS Execution Log
 
 The CTS process generates logs showing clock tree synthesis progress, buffer insertion statistics, skew analysis, and final tree metrics.
+
+<img width="1680" height="1050" alt="cts_log" src="https://github.com/user-attachments/assets/4ae1f452-3f00-4d5d-b15f-97263970d618" />
+
+<img width="1680" height="1050" alt="cts_log1" src="https://github.com/user-attachments/assets/9fde05fd-8706-4669-a3c9-b0eecf3ce322" />
+
 
 #### Hold Time Considerations
 
@@ -836,6 +848,9 @@ route_auto -max_detail_route_iterations 5
 3. **Congestion Analysis:** Identify bottleneck regions
 4. **Net Assignment:** Assign nets to routing regions
 
+<img width="1680" height="1050" alt="routing_log1" src="https://github.com/user-attachments/assets/cb47c24e-094d-4a6a-b689-fc9e5294c730" />
+
+
 #### Track Assignment
 
 Track assignment determines which routing layer and position each net uses:
@@ -868,6 +883,9 @@ Clock signals are routed with special handling to minimize skew and noise:
 - Minimum layer spacing to avoid crosstalk
 - Via patterns optimized for current distribution
 
+<img width="1680" height="1050" alt="timing_estimation_log" src="https://github.com/user-attachments/assets/1d1b9d26-44d8-40b1-8506-e88817832864" />
+
+
 #### Power and Ground Routing
 
 Power distribution is completed during routing:
@@ -878,9 +896,15 @@ Power distribution is completed during routing:
 - Perimeter connection verification
 - Power pad to core connectivity validation
 
+<img width="1680" height="1050" alt="connect_pg_net" src="https://github.com/user-attachments/assets/e8ac3302-9f8a-453d-98bc-7fac9579a7fe" />
+
+
 #### Routing DRC Violations
 
 The routing phase identifies and iteratively fixes design rule violations including spacing, width, and via enclosure issues.
+
+<img width="1680" height="1050" alt="routing_errors" src="https://github.com/user-attachments/assets/920ecf9c-e4fd-4504-a1db-4f94d790b5d5" />
+
 
 #### Outputs
 
