@@ -322,16 +322,3 @@ Task_NoPOR_Final_GLS/
 5. **Industry Aligned**: External reset supervision is the standard approach in modern ASICs
 
 ---
-
-## 📄 License & Attribution
-
-**Design by**: Jitesh Reddy  
-**Program**: India RISC-V SoC Tapeout Program  
-**Technology**: SCL-180 nm  
-**Status**: ✅ Complete, Verified, Ready for Production
-
----
-
-**Document Version**: 1.0  
-**Last Updated**: December 30, 2025  
-**Verification**: Complete & Validated
