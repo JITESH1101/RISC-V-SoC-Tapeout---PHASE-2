@@ -1,4 +1,4 @@
-# Backend Flow Bring-Up: 100 MHz Physical Design Implementation
+<img width="1680" height="1050" alt="floorplan_log" src="https://github.com/user-attachments/assets/692d34d7-5d11-444a-b122-c4a92b3c2d43" /># Backend Flow Bring-Up: 100 MHz Physical Design Implementation
 
 ## Table of Contents
 
@@ -421,6 +421,9 @@ The SRAM macro (32×1024 bits) is positioned in the upper-right corner of the co
 - **Status:** Fixed (immobile during optimization)
 - **Halo Margin:** 2 µm minimum on all sides
 
+<img width="1680" height="1050" alt="floorplan2" src="https://github.com/user-attachments/assets/748ef2cb-a151-47c7-baf8-c710f5a93817" />
+
+
 #### Blockage Creation
 
 Hard placement blockages establish region exclusions:
@@ -435,9 +438,15 @@ Hard placement blockages establish region exclusions:
 
 **Detailed Floorplan View:** Shows the hierarchical organization with IO pads, core boundaries, and SRAM macro placement location.
 
+<img width="1680" height="1050" alt="floorplan1" src="https://github.com/user-attachments/assets/08ef682b-5d74-4e9d-9590-b709604e0f38" />
+
+
 #### Floorplan Execution Log
 
 The floorplanning process generates comprehensive logs showing design library creation, netlist reading, and floorplan initialization steps.
+
+<img width="1680" height="1050" alt="floorplan_log" src="https://github.com/user-attachments/assets/7612df45-feea-4cf4-a51f-33681c012545" />
+
 
 #### Outputs
 
@@ -543,9 +552,17 @@ compile_pg -strategies {strategy_m9m10}
 
 **Detailed Power Ring and Mesh:** High-level view showing power rings around the core perimeter and internal stripe distribution pattern for complete coverage.
 
+<img width="1680" height="1050" alt="powerplan1" src="https://github.com/user-attachments/assets/d824695e-ca7c-463a-8455-3e547f0142c0" />
+
+<img width="1680" height="1050" alt="powerplan2" src="https://github.com/user-attachments/assets/fc866788-68e3-4871-a4b4-b1dc372715ea" />
+
+
 #### Power Planning Execution Log
 
 The power planning process generates logs showing power region creation, strategy definition, via placement, and connectivity verification.
+
+<img width="1680" height="1050" alt="powerplan_log" src="https://github.com/user-attachments/assets/4a6f4a2f-6ce4-4471-9bf7-3f448e777776" />
+
 
 #### Power Grid Connectivity Verification
 
