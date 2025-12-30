@@ -436,7 +436,6 @@ This task successfully demonstrated the migration of vsdcaravel to a pure Synops
 ✅ **VCS** is now the sole simulation engine  
 ✅ **DC_TOPO** provides a physical-aware synthesized netlist  
 ✅ Documentation is fully compliant, with no traces of open-source tools  
-✅ The design is now ready for Physical Design (Place & Route) with clean, verified netlists and preserved macros
 ✅ All relevant files with changes made and reports are attached to this repo.
 
 
