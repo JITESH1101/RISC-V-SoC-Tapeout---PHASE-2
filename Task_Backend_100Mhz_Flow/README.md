@@ -1,4 +1,4 @@
-<img width="1680" height="1050" alt="floorplan_log" src="https://github.com/user-attachments/assets/692d34d7-5d11-444a-b122-c4a92b3c2d43" /># Backend Flow Bring-Up: 100 MHz Physical Design Implementation
+# Backend Flow Bring-Up: 100 MHz Physical Design Implementation
 
 ## Table of Contents
 
