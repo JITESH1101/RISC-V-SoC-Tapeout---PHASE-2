@@ -1816,17 +1816,3 @@ While signoff-grade optimization has not been pursued, the design meets all func
 
 ---
 
-## Contact and Support
-
-For questions regarding this implementation or the backend flow methodology:
-
-- **Design Team Lead:** [Contact information if applicable]
-- **Documentation:** See README.md for complete flow description
-- **Collateral Files:** All required files available in `collateral/` directory
-- **Report Review:** Start with `primetime/reports/timing_summary.rpt`
-
----
-
-**Document Version:** 1.0  
-**Last Updated:** December 30, 2025  
-**Status:** Complete - Ready for Review
