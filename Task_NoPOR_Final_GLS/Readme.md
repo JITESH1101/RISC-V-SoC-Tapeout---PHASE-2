@@ -80,6 +80,22 @@ A critical review of SCL-180 pad datasheets, contrasting them with SKY130 requir
 
 ## 🛠️ Phase-2: RTL Refactoring Strategy
 
+
+First clone the following github repo for the code base 
+
+<img width="1680" height="1050" alt="git_clone" src="https://github.com/user-attachments/assets/c3829d8d-706e-4f66-aaf4-79c6c9198142" />
+
+Now search for every instance in the design where dummy_por and its corresponding signals are used
+
+<img width="1068" height="225" alt="Screenshot from 2025-12-15 10-46-44" src="https://github.com/user-attachments/assets/d7414ab2-0b4d-4e08-9933-ae4be2c34f91" />
+
+<img width="1040" height="765" alt="Screenshot from 2025-12-15 10-47-38" src="https://github.com/user-attachments/assets/4e7cbed3-22cd-4489-b331-5d2415490286" />
+
+<img width="1044" height="400" alt="Screenshot from 2025-12-15 10-48-30" src="https://github.com/user-attachments/assets/9c4e4f22-20cc-4242-94fb-d35450e6cbd9" />
+
+<img width="1053" height="411" alt="Screenshot from 2025-12-15 10-49-18" src="https://github.com/user-attachments/assets/d2703231-bf9b-45ec-a7c4-d52b876cf0f6" />
+
+
 ### Modifications Implemented
 
 The `dummy_por` module, which previously utilized non-synthesizable delays to mimic startup, was completely removed. The top-level `vsdcaravel.v` and housekeeping logic were refactored to accept a single global input: `input reset_n`.
@@ -106,6 +122,7 @@ assign por_l  = ~reset_n;
 
 ### RTL Verification (VCS)
 
+
 Verification was performed to ensure that removing the internal delay logic did not break the reset sequence.
 
 #### Simulation Command
@@ -120,12 +137,19 @@ vcs -full64 -sverilog -timescale=1ns/1ps -debug_access+all \
 ./simv -no_save +define+DUMP_VCD=1 | tee sim_log.txt
 ```
 
+<img width="1680" height="1050" alt="rtl_make_compile" src="https://github.com/user-attachments/assets/4032fd40-0b6e-433d-966e-79c733ddb874" />
+
+<img width="1680" height="1050" alt="rtl_make_sim" src="https://github.com/user-attachments/assets/62c2681a-c821-4729-b468-d1716081293f" />
+
+
+
 #### Results
 
 - **Reset Timing**: The waveform confirms `reset_n` releases at 1000ns exactly as driven by the testbench
 - **State Integrity**: Register read/write operations (Reg 0 to 18) function correctly immediately after reset release
 
-**Figure 1**: RTL Waveform showing clean reset release at 1000ns
+
+<img width="1680" height="1050" alt="rtl_waveform" src="https://github.com/user-attachments/assets/a35b0132-751d-42b8-9c85-3c765ba051e8" />
 
 ---
 
@@ -157,7 +181,26 @@ dc_shell -f synth.tcl
 ✅ **No Inferred Latches**: Reset removal did not create unintentional storage elements  
 ✅ **Clean Reset Tree**: Reports confirm `reset_n` drives the set/reset pins of all flops  
 
-**Figure 2**: Synthesis log confirming absence of `dummy_por`
+<img width="1680" height="1050" alt="synthesis" src="https://github.com/user-attachments/assets/b445022f-efed-43c8-9f5e-76dda9b1c9a1" />
+
+
+```bash
+start_gui
+```
+
+- schematic view
+
+<img width="755" height="664" alt="schematic" src="https://github.com/user-attachments/assets/0e918938-5848-46fe-a437-479cfecd8467" />
+
+- padframe
+
+<img width="564" height="663" alt="pad_Frame" src="https://github.com/user-attachments/assets/5b808149-ef56-4f11-9ca5-3cfd52647031" />
+
+
+- chip_io
+
+<img width="549" height="664" alt="chip_io" src="https://github.com/user-attachments/assets/0f886f88-6666-4452-8bdc-ac7df3f6c030" />
+
 
 ---
 
@@ -175,7 +218,13 @@ GLS acts as the **"Final Proof"**. It validates that the synthesized netlist (wh
 
 - **Functional Equivalence**: The SPI register tests passed, matching the RTL behavior exactly.
 
-**Figure 3**: GLS Waveform demonstrating clean external reset behavior and subsequent register operations
+<img width="1680" height="1050" alt="gls_output" src="https://github.com/user-attachments/assets/07e3d016-e9b2-4c31-b629-2a99a45e7858" />
+
+<img width="1680" height="1050" alt="gls_sim" src="https://github.com/user-attachments/assets/ff3597cb-3f1f-4976-9a24-1b884115eb0d" />
+
+
+<img width="1680" height="1050" alt="gls_waveform" src="https://github.com/user-attachments/assets/b10b77e4-1edd-4aab-878a-f1585efca98a" />
+
 
 ---
 
@@ -217,6 +266,10 @@ True POR circuits require:
 | **Power-up X-States** | Reset held low during VDD ramp-up |
 | **Reset Pin Noise** | Pull-down resistor + RC filter on board |
 | **Missing Reset** | Supervisor watchdog timer (standard feature) |
+
+The full working logic flow of the design is as follows 
+
+<img width="962" height="654" alt="Screenshot from 2025-12-16 20-03-56" src="https://github.com/user-attachments/assets/6ff5196b-0053-48f9-953c-f4e619b8bce4" />
 
 ---
 
