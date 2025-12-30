@@ -30,6 +30,12 @@ This repository documents a comprehensive backend flow implementation for valida
 
 The design being implemented is the **Raven wrapper**, a complex chip featuring 45,000+ standard cells and an embedded 32×1024 SRAM macro, synthesized using the NangateOpenCellLibrary at FreePDK45 (45nm) technology. All work has been carried out using Synopsys IC Compiler II for physical design tasks, supplemented by parasitic extraction through Star-RC and comprehensive static timing analysis using PrimeTime.
 
+<img width="955" height="837" alt="image" src="https://github.com/user-attachments/assets/c298c739-adf0-45e4-a740-a4db1ce7964c" />
+
+<img width="600" height="471" alt="image" src="https://github.com/user-attachments/assets/f0fd4856-1f2a-494e-b33e-39f9c8ba213c" />
+
+
+
 ---
 
 ## Design Specifications
