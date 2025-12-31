@@ -1,0 +1,54 @@
+****************************************
+Report : timing
+	-path_type full
+	-delay_type min
+	-input_pins
+	-nets
+	-max_paths 1
+	-transition_time
+	-capacitance
+	-sort_by slack
+Design : raven_wrapper
+Version: U-2022.12-SP3
+Date   : Thu Dec 25 17:55:53 2025
+****************************************
+
+
+  Startpoint: _20733_ (rising edge-triggered flip-flop clocked by ext_clk)
+  Endpoint: _19962_ (rising clock gating-check end-point clocked by pll_clk)
+  Path Group: **clock_gating_default**
+  Path Type: min
+
+  Point                       Fanout    Cap      Trans       Incr       Path
+  -----------------------------------------------------------------------------
+  clock ext_clk (rise edge)                     0.0000     0.0000     0.0000
+  clock network delay (ideal)                              0.0000     0.0000
+  _20733_/CK (DFF_X1)                           0.0000     0.0000     0.0000 r
+  _20733_/Q (DFF_X1)                            0.0247     0.0980 &   0.0980 f
+  core1.pll_output_dest[0] (net)    1  18.9326 
+  ZBUF_273_inst_78152/A (BUF_X16)               0.0247     0.0096 &   0.1076 f
+  ZBUF_273_inst_78152/Z (BUF_X16)               0.0063     0.0321 &   0.1397 f
+  ZBUF_273_346 (net)             2 181.4751 
+  ctmTdsLR_1_78362/A2 (AND2_X4)                 0.0063     0.0715 &   0.2111 f
+  ctmTdsLR_1_78362/ZN (AND2_X4)                 0.0122     0.0325 &   0.2436 f
+  ZBUF_203_1572 (net)            2  32.0247 
+  ZBUF_5_inst_68425/A (CLKBUF_X1)               0.0122     0.0122 &   0.2558 f
+  ZBUF_5_inst_68425/Z (CLKBUF_X1)               0.0307     0.0558 &   0.3117 f
+  ZBUF_5_1571 (net)              1  11.5910 
+  _19962_/A1 (NAND2_X1)                         0.0310     0.0044 &   0.3161 f
+  data arrival time                                                   0.3161
+
+  clock pll_clk (fall edge)                     0.0000     2.0000     2.0000
+  clock network delay (ideal)                              0.0000     2.0000
+  clock reconvergence pessimism                            0.0000     2.0000
+  _19962_/A2 (NAND2_X1)                                               2.0000 f
+  clock gating hold time                                   0.0000     2.0000
+  data required time                                                  2.0000
+  -----------------------------------------------------------------------------
+  data required time                                                  2.0000
+  data arrival time                                                  -0.3161
+  -----------------------------------------------------------------------------
+  slack (VIOLATED)                                                   -1.6839
+
+
+1

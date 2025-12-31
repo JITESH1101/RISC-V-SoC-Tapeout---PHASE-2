@@ -1,0 +1,4 @@
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.spef filter=lfs diff=lfs merge=lfs -text
+Task_Backend_100Mhz_Flow/task6/icc2/outputs/raven_post_route_net.v filter=lfs diff=lfs merge=lfs -text
