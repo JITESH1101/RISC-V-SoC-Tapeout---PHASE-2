@@ -155,6 +155,14 @@ report_design > synthesis/reports/design.rpt
 cd synthesis
 dc_shell -f synth.tcl | tee synthesis_complete.log
 ```
+<img width="1680" height="1050" alt="synthesis" src="https://github.com/user-attachments/assets/ef89bdbb-3a0f-4184-a200-b0322a1dea9b" />
+
+<img width="755" height="664" alt="schematic" src="https://github.com/user-attachments/assets/7ada0f5d-6fb1-4252-8d16-dee9527831bd" />
+
+<img width="564" height="663" alt="pad_Frame" src="https://github.com/user-attachments/assets/6ed8a787-b995-416d-b4b0-4b69d10ed17a" />
+
+<img width="549" height="664" alt="chip_io" src="https://github.com/user-attachments/assets/620b8069-2ec3-4789-afe2-ace11f711383" />
+
 
 **Key Metrics:**
 - Cell count: ~45,000 (excluding blackboxes)
@@ -246,6 +254,10 @@ gpio_wrapper #(.IO_TYPE("scl18_io_digital")) gpio_inst (
     ...
 );  // ✅ Correct SCL 180nm pad definition
 ```
+<img width="1680" height="1050" alt="gpio_compile" src="https://github.com/user-attachments/assets/3c364c59-1645-4285-9541-5c1952d6b963" />
+
+<img width="1680" height="1050" alt="gpio_Sim" src="https://github.com/user-attachments/assets/cb7652e4-bc90-4253-b01c-ad3dc5f02661" />
+
 
 **Technical Issue:**
 - Compilation succeeds (no syntax errors)
@@ -265,6 +277,11 @@ gpio_wrapper #(.IO_TYPE("scl18_io_digital")) gpio_inst (
 - Port definitions differ (e.g., `ENABLE_H` naming convention changes)
 - Signal routing from pad to core logic broken
 
+<img width="1680" height="1050" alt="irq_compile" src="https://github.com/user-attachments/assets/703cfe34-2bad-4889-87a7-286b9af7043c" />
+
+<img width="1680" height="1050" alt="irq_sim" src="https://github.com/user-attachments/assets/beecaa10-4354-4ef9-ab83-3551804669e4" />
+
+
 
 ---
 
@@ -279,6 +296,11 @@ gpio_wrapper #(.IO_TYPE("scl18_io_digital")) gpio_inst (
 - SCL 180nm has different pad definitions for storage control signals
 - Wrapper pad instantiation fails silently, leaving signals undriven
 
+<img width="1680" height="1050" alt="storage_compile" src="https://github.com/user-attachments/assets/7d07c394-9e2a-425c-9ecb-e24c93d85dff" />
+
+<img width="1680" height="1050" alt="storage_sim" src="https://github.com/user-attachments/assets/3bea3dcb-8d4d-4bb9-8ec0-832e8a27167e" />
+
+
 
 ---
 
@@ -292,6 +314,10 @@ gpio_wrapper #(.IO_TYPE("scl18_io_digital")) gpio_inst (
 - MPRJ_CTRL manages user project isolation and enable signals
 - Wrapper still instantiates SKY130A pads
 - Isolation signals not driven in SCL 180nm environment
+
+<img width="1680" height="1050" alt="mprj_Ctrl_compile" src="https://github.com/user-attachments/assets/49778e36-bcaa-4867-965d-4624a51ba9af" />
+
+<img width="1680" height="1050" alt="mprj_ctrl_sim" src="https://github.com/user-attachments/assets/da2f4ee5-c95f-4726-b350-fac9c75f5758" />
 
 
 ---
@@ -342,6 +368,9 @@ create_floorplan \
     -sites CORE
 ```
 
+<img width="1680" height="1050" alt="floorplan_init" src="https://github.com/user-attachments/assets/dfe06731-6b61-4d0d-9744-f97efec67163" />
+
+
 **IO Pad Placement:**
 
 | Side | Pad Count | Signals |
@@ -350,6 +379,10 @@ create_floorplan \
 | Left | 15 | flash interface (flashio[0:3]), GPIO[0:14] |
 | Top | 9 | GPIO[21:28], irq_pin |
 | Bottom | 15 | power/reset, serial, SPI, trap, xtal |
+
+
+<img width="1680" height="1050" alt="place_pins1" src="https://github.com/user-attachments/assets/9060e14b-9486-4d0a-9050-013a61e5bcf2" />
+
 
 **SRAM Macro Placement:**
 ```tcl
@@ -360,6 +393,9 @@ create_placement \
     -orientation MXR90 \
     -fixed
 ```
+
+<img width="1680" height="1050" alt="create_halo" src="https://github.com/user-attachments/assets/490a2df9-c415-4e47-9c8d-04f07b481c03" />
+
 
 **Blockage Creation:**
 - Core edge: 20 µm band (prevents cells near die edge)
@@ -424,6 +460,15 @@ compile_pg -strategies {strat_m9m10}
 - IR drop analysis report
 - Power-planned DEF file
 
+<img width="1680" height="1050" alt="powerplan_log" src="https://github.com/user-attachments/assets/4d5f0854-d0db-4512-8125-59d61b53e286" />
+
+
+<img width="1680" height="1050" alt="powerplan1" src="https://github.com/user-attachments/assets/ae4636f1-fa4a-48e7-8947-32b6e1e7d09d" />
+
+<img width="1680" height="1050" alt="powerplan2" src="https://github.com/user-attachments/assets/2f95906b-8c64-408c-9bfa-661d6e0e540b" />
+
+
+
 ---
 
 ### Phase 3: Standard Cell Placement
@@ -466,7 +511,14 @@ place_opt \
 - Placed DEF file
 - Timing report post-placement
 - Congestion map
-- Cell density statistics
+- Cell density statistics.
+
+<img width="1680" height="1050" alt="placement_log1" src="https://github.com/user-attachments/assets/77e8fe3c-52f7-465f-a7ed-f37eb6780025" />
+
+<img width="1680" height="1050" alt="placement_log2" src="https://github.com/user-attachments/assets/3b11f3cd-a93f-4317-a955-d1c4ccf71a7f" />
+
+<img width="1680" height="1050" alt="placement" src="https://github.com/user-attachments/assets/56bfe88f-1105-4de7-9f44-666933b74fd3" />
+
 
 ---
 
@@ -502,6 +554,14 @@ create_clock_tree \
 - Skew analysis report
 - Clock tree visualization
 
+<img width="1680" height="1050" alt="cts_log" src="https://github.com/user-attachments/assets/738aab1f-9089-493a-a729-1b27533934b1" />
+
+<img width="1680" height="1050" alt="cts_log1" src="https://github.com/user-attachments/assets/586bda60-5647-4b90-b200-29c525df50a6" />
+
+<img width="1680" height="1050" alt="cts1" src="https://github.com/user-attachments/assets/eaf9b2c0-014c-4a41-afc0-5cc292eb2f4b" />
+
+<img width="1680" height="1050" alt="cts2" src="https://github.com/user-attachments/assets/7b918202-5476-426e-a9c3-72606544a273" />
+
 ---
 
 ### Phase 5: Detailed Routing
@@ -536,6 +596,18 @@ route_design
 - Routing congestion report
 - DRC verification report
 - Wirelength statistics
+
+<img width="1680" height="1050" alt="connect_pg_net" src="https://github.com/user-attachments/assets/561d0666-f6ba-4aa7-8797-a8756710a664" />
+
+<img width="1680" height="1050" alt="routing_log1" src="https://github.com/user-attachments/assets/c1eb664e-731a-4ec6-bfa4-0709f48e64a4" />
+
+![ROUTING1](https://github.com/user-attachments/assets/fe7e46de-c8e6-4dfe-82fc-bcb63070f4bf)
+
+![routing2](https://github.com/user-attachments/assets/4188566c-e601-41c3-ba8c-5732ba1e5b62)
+
+
+
+
 
 ---
 
@@ -663,6 +735,8 @@ This is a **critical action item** when migrating to VSD Caravel to ensure compl
 - Dedicated routing channels for macro pin access
 
 When the backend flow is applied to VSD Caravel's macros, this will be verified and corrected to ensure clean, signoff-ready layouts with no routing over macro surfaces.
+
+<img width="1680" height="1050" alt="routing_errors" src="https://github.com/user-attachments/assets/88a233f4-69a1-4d95-9c71-ac7d6c26b93d" />
 
 ---
 
@@ -912,7 +986,6 @@ report_pg_analysis > power_grid_analysis.rpt
 ```
 
 **Acceptance Criteria:**
-- IR drop < 5% ✅ (3.2% achieved)
 - All cells powered ✅ (100% coverage)
 - Via spacing adequate ✅ (5-10 µm)
 - No floating nodes ✅ (verified)
